@@ -152,58 +152,71 @@ def battle(id, canRun):
             print('\nDerrota...\n')
             return 2
 
-# começo do exemplo de possível estrutura de estoria
+turnOff=False
+print('Descrição do jogo\n')
+while(turnOff==False):
+    plyrinpt=int(input('Digite 1 para começar o jogo\nDigite 0 para desligar o jogo\nDecisão: '))
 
-storyIndex = 0
-if(battle(1,True)==1):
-    print('Estoria se vitória ( batalha 1 )')
-    storyIndex=1
-else:
-    print('Estória se derrota ou fuga ( batalha 1 )')
-    storyIndex=2
+    if(plyrinpt==1):
 
-if(storyIndex==1):
-    storyIndex=battle(2,True)
-    if(storyIndex==1):
-        print('Estoria se vitória ( batalha 2 )')
-        storyIndex=1
-    elif(storyIndex==2):
-        print('Estória se derrota ( batalha 2 )')
-        storyIndex=2
-    else:
-        print('Estória se fuga ( batalha 2 )')
-        storyIndex=3
-else:
-    test=False
-    while(test==False):
-        print('Escolha entre as opções\nX ( 1 )\nY ( 2 )\nZ ( 3 )')
-        storyIndex=int(input('Seleção: '))
-        if(storyIndex==1):
-            print('Consequência de X')
-            test=True
-            battle(lobo,False)
-            storyIndex=2
-        elif(storyIndex==2):
-            print('Consequência de Y')
-            test=True
-        elif(storyIndex==3):
-            print('Consequência de Z')
-            test=True
+        # começo do exemplo de possível estrutura de estoria
 
+        storyIndex = 0
+        if(battle(1,True)==1):
+            print('Estoria se vitória ( batalha 1 )')
+            storyIndex=1
         else:
-            print('Escolha inválida (',storyIndex,')')
+            print('Estória se derrota ou fuga ( batalha 1 )')
+            storyIndex=2
 
-if(storyIndex==1):
-    print('Estoria com atritos')
-elif(storyIndex==2):
-    storyIndex = battle(loboMP,False)
-    if (storyIndex == 1):
-        print('Estoria se vitória ( batalha loboMP )')
-        storyIndex = 1
+        if(storyIndex==1):
+            storyIndex=battle(2,True)
+            if(storyIndex==1):
+                print('Estoria se vitória ( batalha 2 )')
+                storyIndex=1
+            elif(storyIndex==2):
+                print('Estória se derrota ( batalha 2 )')
+                storyIndex=2
+            else:
+                print('Estória se fuga ( batalha 2 )')
+                storyIndex=3
+        else:
+            test=False
+            while(test==False):
+                print('Escolha entre as opções\nX ( 1 )\nY ( 2 )\nZ ( 3 )')
+                storyIndex=int(input('Seleção: '))
+                if(storyIndex==1):
+                    print('Consequência de X')
+                    test=True
+                    battle(lobo,False)
+                    storyIndex=2
+                elif(storyIndex==2):
+                    print('Consequência de Y')
+                    test=True
+                elif(storyIndex==3):
+                    print('Consequência de Z')
+                    test=True
+
+                else:
+                    print('Escolha inválida (',storyIndex,')')
+
+        if(storyIndex==1):
+            print('Estoria com atritos')
+        elif(storyIndex==2):
+            storyIndex = battle(loboMP,False)
+            if (storyIndex == 1):
+                print('Estoria se vitória ( batalha loboMP )')
+                storyIndex = 1
+            else:
+                print('Estória se derrota ( batalha loboMP )')
+                storyIndex = 2
+        else:
+            print('Estoria pacifica')
+
+        # fim do exemplo
+
+    elif(plyrinpt==0):
+        print('Desligando o jogo')
+        turnOff=True
     else:
-        print('Estória se derrota ( batalha loboMP )')
-        storyIndex = 2
-else:
-    print('Estoria pacifica')
-
-# fim do exemplo
+        print('Seleção inválida (',plyrinpt,')')
