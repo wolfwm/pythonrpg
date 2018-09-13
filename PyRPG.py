@@ -1,4 +1,10 @@
 import random
+# import time
+
+# x = 2 if a > b else 3
+
+# print('''asd
+# asdasd''')
 
 monlist1 = []
 monlist2 = []
@@ -68,25 +74,6 @@ class Player:
         self.runCount = 0
         self.deathCount = 0
 
-charCreateTest=False
-while(charCreateTest == False):
-    sex = input('\nQual o sexo de seu personagem? Digite m para masculino ou f para feminino: ')
-    if (sex == 'm' or sex == 'f'):
-        player = Player(sex,input('\nEscolha o nome de seu personagem: '))
-        confirmTest=False
-        while(confirmTest==False):
-            print('\nPersonagem:',player.name,'de sexo',sex)
-            test=input('Confirmar personagem? s/n: ')
-            if(test=='s'):
-                confirmTest=True
-                charCreateTest=True
-            elif(test=='n'):
-                confirmTest=True
-            else:
-                print('Opção inválida (',test,')')
-    else:
-        print('Sexo do personagem inválido (', sex,')')
-
 def battle(id, canRun):
 
         # cada id de 1 a 5 é uma dificuldade crescente
@@ -155,9 +142,28 @@ def battle(id, canRun):
 turnOff=False
 print('Descrição do jogo\n')
 while(turnOff==False):
-    plyrinpt=int(input('Digite 1 para começar o jogo\nDigite 0 para desligar o jogo\nDecisão: '))
+    plyrinpt=input('Digite 1 para começar o jogo\nDigite 0 para desligar o jogo\nDecisão: ')
 
-    if(plyrinpt==1):
+    if(plyrinpt=='1'):
+
+        charCreateTest = False
+        while (charCreateTest == False):
+            sex = input('\nQual o sexo de seu personagem? Digite m para masculino ou f para feminino: ')
+            if (sex == 'm' or sex == 'f'):
+                player = Player(sex, input('\nEscolha o nome de seu personagem: '))
+                confirmTest = False
+                while (confirmTest == False):
+                    print('\nPersonagem:', player.name, 'de sexo', sex)
+                    test = input('Confirmar personagem? s/n: ')
+                    if (test == 's'):
+                        confirmTest = True
+                        charCreateTest = True
+                    elif (test == 'n'):
+                        confirmTest = True
+                    else:
+                        print('Opção inválida (', test, ')')
+            else:
+                print('Sexo do personagem inválido (', sex, ')')
 
         # começo do exemplo de possível estrutura de estoria
 
@@ -184,21 +190,22 @@ while(turnOff==False):
             test=False
             while(test==False):
                 print('Escolha entre as opções\nX ( 1 )\nY ( 2 )\nZ ( 3 )')
-                storyIndex=int(input('Seleção: '))
-                if(storyIndex==1):
+                choiceTest=input('Seleção: ')
+                if(choiceTest=='1'):
                     print('Consequência de X')
                     test=True
                     battle(lobo,False)
                     storyIndex=2
-                elif(storyIndex==2):
+                elif(choiceTest=='2'):
                     print('Consequência de Y')
                     test=True
-                elif(storyIndex==3):
+                    storyIndex=2
+                elif(choiceTest=='3'):
                     print('Consequência de Z')
                     test=True
-
+                    storyIndex=3
                 else:
-                    print('Escolha inválida (',storyIndex,')')
+                    print('Escolha inválida (',choiceTest,')')
 
         if(storyIndex==1):
             print('Estoria com atritos')
@@ -215,7 +222,7 @@ while(turnOff==False):
 
         # fim do exemplo
 
-    elif(plyrinpt==0):
+    elif(plyrinpt=='0'):
         print('Desligando o jogo')
         turnOff=True
     else:
