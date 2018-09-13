@@ -55,13 +55,15 @@ class Player:
         self.sex = sex
         self.name = name
         if(sex=='m'):
-            self.hp = 410
+            self.hpmax = 410
+            self.mpmax = 150
             self.atk = 45
-            self.mp = 150
         else:
-            self.hp = 400
+            self.hpmax = 400
+            self.mpmax = 200
             self.atk = 40
-            self.mp = 200
+        self.hp = self.hpmax
+        self.mp = self.mpmax
         self.money = 20
         self.runCount = 0
         self.deathCount = 0
@@ -85,25 +87,30 @@ while(charCreateTest == False):
     else:
         print('Sexo do personagem inválido (', sex,')')
 
-def battle(level):
+def battle(id, canRun):
 
-    if(level==1):
+        # cada id de 1 a 5 é uma dificuldade crescente
+
+    if(id==1):
         mon = monlist1[random.randint(0, len(monlist1) - 1)]
-    elif(level==2):
+    elif(id == 2):
         mon = monlist2[random.randint(0, len(monlist2) - 1)]
-    elif(level==3):
+    elif(id == 3):
         mon = monlist3[random.randint(0, len(monlist3) - 1)]
-    elif(level==4):
+    elif(id == 4):
         mon = monlist4[random.randint(0, len(monlist4) - 1)]
-    elif(level==5):
+    elif(id == 5):
         mon = monlist5[random.randint(0, len(monlist5) - 1)]
-    elif(level==6):
+
+    elif(id == 6):
         mon = bosslist[random.randint(0, len(bosslist) - 1)]
 
-        # dificuldade 6 é uma luta de chefe
+        # id 6 é uma luta de chefe aleatória
 
+    elif(id in monlist1 or id in monlist2 or id in monlist3 or id in monlist4 or id in monlist5 or id in bosslist):
+        mon = id
     else:
-        print('ERRO: Dificuldade de batalha inválida ( nível',level,')')
+        print('ERRO: ID de inimigo inválido (', id, ')')
 
     run=False
     enemyHP = mon.hp
@@ -111,17 +118,23 @@ def battle(level):
         print('\n',mon.name,': ',enemyHP,'HP\n',player.name,': ',player.hp,'HP\n')
         choiceTest=False
         while(choiceTest==False):
-            plyrinpt=input('Digite a para atacar\nDigite f para fugir\nDecisão: ')
+            plyrinpt=input('Digite a para atacar\nDigite e para esperar\nDigite f para fugir\nDecisão: ')
             if(plyrinpt=='a'):
                 enemyHP -= player.atk
-                print(player.name,'infligiu',player.atk,'de dano em',mon.name)
+                print(player.name,'infligiu',player.atk,'de dano a',mon.name)
                 choiceTest=True
             elif(plyrinpt=='f'):
-                choiceTest=True
-                run=True
-                player.runCount += 1
-                print(player.name,'fugiu de', mon.name,'\n')
-                return 3
+                if(canRun==True):
+                    choiceTest = True
+                    run=True
+                    player.runCount += 1
+                    print(player.name,'fugiu de', mon.name,'\n')
+                    return 3
+                else:
+                    print(player.name,'não pode fugir!')
+            elif(plyrinpt=='e'):
+                choiceTest = True
+                print(player.name,'esperou')
             else:
                 print('Escolha inválida (',plyrinpt,')')
         if(enemyHP > 0 and player.hp > 0 and run==False):
@@ -133,13 +146,16 @@ def battle(level):
             return 1
         if(player.hp<=0):
             player.deathCount += 1
-            player.hp=400
+            player.hp=player.hpmax
+            player.mp=player.mpmax
             run=True
-            print('\nDerrota...')
+            print('\nDerrota...\n')
             return 2
 
+# começo do exemplo de possível estrutura de estoria
+
 storyIndex = 0
-if(battle(1)==1):
+if(battle(1,True)==1):
     print('Estoria se vitória ( batalha 1 )')
     storyIndex=1
 else:
@@ -147,7 +163,7 @@ else:
     storyIndex=2
 
 if(storyIndex==1):
-    storyIndex=battle(2)
+    storyIndex=battle(2,True)
     if(storyIndex==1):
         print('Estoria se vitória ( batalha 2 )')
         storyIndex=1
@@ -165,6 +181,7 @@ else:
         if(storyIndex==1):
             print('Consequência de X')
             test=True
+            battle(lobo,False)
             storyIndex=2
         elif(storyIndex==2):
             print('Consequência de Y')
@@ -177,17 +194,16 @@ else:
             print('Escolha inválida (',storyIndex,')')
 
 if(storyIndex==1):
-    print('Estoria pacifica')
+    print('Estoria com atritos')
 elif(storyIndex==2):
-    storyIndex = battle(6)
+    storyIndex = battle(loboMP,False)
     if (storyIndex == 1):
-        print('Estoria se vitória ( batalha 6 )')
+        print('Estoria se vitória ( batalha loboMP )')
         storyIndex = 1
-    elif (storyIndex == 2):
-        print('Estória se derrota ( batalha 6 )')
-        storyIndex = 2
     else:
-        print('Estória se fuga ( batalha 6 )')
-        storyIndex = 3
+        print('Estória se derrota ( batalha loboMP )')
+        storyIndex = 2
 else:
-    print('Estoria com desavenças')
+    print('Estoria pacifica')
+
+# fim do exemplo
