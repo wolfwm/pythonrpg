@@ -1,10 +1,6 @@
 import random
+
 # import time
-
-# x = 2 if a > b else 3
-
-# print('''asd
-# asdasd''')
 
 monlist1 = []
 monlist2 = []
