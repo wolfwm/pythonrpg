@@ -16,11 +16,12 @@ magiclist = []
 
 class Monster:
 
-    def __init__(self, name, hp, atk, dif):
+    def __init__(self, name, hp, atk, defe, dif):
         if(0<dif<=6):
             self.name = name
             self.hp = hp
             self.atk = atk
+            self.defe = defe
             if(dif==1):
                 monlist1.append(self)
             elif(dif==2):
@@ -38,37 +39,42 @@ class Monster:
 
 # inicio da lista de monstros
 
-lobo = Monster('Lobo',100,20,1)
-loboF = Monster('Lobo Faminto',130,23,2)
-loboA = Monster('Lobo Alpha',150,26,3)
-loboH = Monster('Lobisomem',160,28,4)
-loboM = Monster('Lobo Mau',180,30,5)
+lobo = Monster('Lobo',100,20,0,1)
+loboF = Monster('Lobo Faminto',130,23,0,2)
+loboA = Monster('Lobo Alpha',150,26,0,3)
+loboH = Monster('Lobisomem',160,28,0,4)
+loboM = Monster('Lobo Mau',180,30,0,5)
 
 # fim da lista de monstros
 
 # inicio da lista de chefes ( dif = 6 )
 
-loboMP = Monster('Lobo Mau Picapau',200,33,6)
+loboMP = Monster('Lobo Mau Picapau',200,33,0,6)
 
 # fim da lista de chefes
 
 class Player:
     def __init__(self,sex,name):
-        self.sex = sex
-        self.name = name
-        if(sex=='m'):
-            self.hpmax = 410
-            self.mpmax = 150
-            self.atk = 45
+        if(sex=='m' or sex=='f'):
+            self.sex = sex
+            self.name = name
+            if(sex=='m'):
+                self.hpmax = 380
+                self.mpmax = 150
+                self.atk = 45
+                self.defe = 15
+            else:
+                self.hpmax = 410
+                self.mpmax = 200
+                self.atk = 40
+                self.defe = 10
+            self.hp = self.hpmax
+            self.mp = self.mpmax
+            self.money = 20
+            self.runCount = 0
+            self.deathCount = 0
         else:
-            self.hpmax = 400
-            self.mpmax = 200
-            self.atk = 40
-        self.hp = self.hpmax
-        self.mp = self.mpmax
-        self.money = 20
-        self.runCount = 0
-        self.deathCount = 0
+            print('ERRO: Sexo de personagem inválido (', sex,')')
 
 def battle(id, canRun):
 
@@ -101,10 +107,12 @@ def battle(id, canRun):
         print('\n',mon.name,': ',enemyHP,'HP\n',player.name,': ',player.hp,'HP\n')
         choiceTest=False
         while(choiceTest==False):
-            plyrinpt=input('Digite a para atacar\nDigite e para esperar\nDigite f para fugir\nDecisão: ')
+            defend = 0
+            plyrinpt=input('Digite a para atacar\nDigite d para se defender\nDigite f para fugir\nDecisão: ')
             if(plyrinpt=='a'):
-                enemyHP -= player.atk
-                print(player.name,'infligiu',player.atk,'de dano a',mon.name)
+                dmg = player.atk + random.randint(-5,3) - mon.defe
+                enemyHP -= dmg
+                print(player.name,'infligiu',dmg,'de dano a',mon.name)
                 choiceTest=True
             elif(plyrinpt=='f'):
                 if(canRun==True):
@@ -115,14 +123,17 @@ def battle(id, canRun):
                     return 3
                 else:
                     print(player.name,'não pode fugir!')
-            elif(plyrinpt=='e'):
+            elif(plyrinpt=='d'):
                 choiceTest = True
-                print(player.name,'esperou')
+                defend = player.defe
+                print(player.name,'está se defendendo')
             else:
                 print('Escolha inválida (',plyrinpt,')')
         if(enemyHP > 0 and player.hp > 0 and run==False):
-            player.hp -= mon.atk
-            print(player.name,'sofreu',mon.atk,'de dano de',mon.name)
+            dmg = mon.atk + random.randint(-3,3) - defend
+            player.hp -= dmg
+            print(player.name,'sofreu',dmg,'de dano de',mon.name)
+            defend = 0
         if(enemyHP<=0):
             player.atk += 1
             print('\nVitória!',player.name,'se sente mais forte\n')
