@@ -175,9 +175,9 @@ def battle(id, canRun):
                     player.hp = player.hp + 50
                     print ('Novo hp de ', player.name, 'é ', player.hp)
                     choiceTest=True
-                elif itemlis == '40mp'
+                elif itemlist == '40mp'
                     player.mp = player.mp + 40
-                    print ('Novo mp de ', player.mp, 'é ', player.mp)
+                    print ('Novo mp de ', player.name, 'é ', player.mp)
                     choiceTest=True
                 elif itemlist == 'defesa'
                     mon.atk = mon.atk - mon.atk*0.20
