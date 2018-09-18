@@ -152,7 +152,7 @@ def battle(id, canRun):
                 defend = player.defe
                 print(player.name,'está se defendendo')
             elif(plyrinpt=='m'):
-                if (fogo in magiclist or gelo in magiclist or agua in magiclist):
+                if (fogo in magiclist or terra in magiclist or agua in magiclist or ar in magiclist or eter in magiclist):
                     mgtest=False
                     while mgtest==False:
                         dmg=0
