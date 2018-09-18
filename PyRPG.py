@@ -160,7 +160,7 @@ def battle(id, canRun):
                         if plyrinpt == 'fogo':
                             if fogo in magiclist:
                                 if mon.weakness == 'fogo':
-                                    dmg=fogo+10
+                                    dmg=fogo+30
                                 else:
                                     dmg=fogo
                                 enemyHP -= dmg
@@ -185,7 +185,7 @@ def battle(id, canRun):
                         elif plyrinpt == 'agua':
                             if agua in magiclist:
                                 if mon.weakness == 'agua':
-                                    dmg = agua + 10
+                                    dmg = agua + 30
                                 else:
                                     dmg = agua
                                 enemyHP -= dmg
