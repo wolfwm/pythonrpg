@@ -57,8 +57,8 @@ loboMP = Monster('Lobo Mau Picapau',200,33,0,'fogo',6)
 #lista de magias
 
 fogo = 70
-gelo = 60
-agua = 50
+gelo = 70
+agua = 70
 magiclist = [fogo, gelo, agua]
 
 #fim da lista de magias
@@ -157,7 +157,7 @@ def battle(id, canRun):
                         if plyrinpt == 'fogo':
                             if fogo in magiclist:
                                 if mon.weakness == 'fogo':
-                                    dmg=fogo+10
+                                    dmg=fogo+30
                                 else:
                                     dmg=fogo
                                 enemyHP -= dmg
@@ -170,7 +170,7 @@ def battle(id, canRun):
                         elif plyrinpt == 'gelo':
                             if gelo in magiclist:
                                 if mon.weakness == 'gelo':
-                                    dmg = gelo + 10
+                                    dmg = gelo + 30
                                 else:
                                     dmg = gelo
                                 enemyHP -= dmg
@@ -182,7 +182,7 @@ def battle(id, canRun):
                         elif plyrinpt == 'agua':
                             if agua in magiclist:
                                 if mon.weakness == 'agua':
-                                    dmg = agua + 10
+                                    dmg = agua + 30
                                 else:
                                     dmg = agua
                                 enemyHP -= dmg
