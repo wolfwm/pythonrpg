@@ -322,9 +322,9 @@ def battle(id, canRun):
 turnOff=False
 print('Descrição do jogo\n')
 while(turnOff==False):
-    plyrinpt=input('Digite 1 para começar o jogo\nDigite 0 para desligar o jogo\nDecisão: ')
+    plyrinpt=input('Pressione ENTER para começar o jogo\nDigite 0 para desligar o jogo\nDecisão: ')
 
-    if(plyrinpt=='1' or plyrinpt == ''):
+    if(plyrinpt == ''):
 
         charCreateTest = False
         while (charCreateTest == False):
@@ -334,8 +334,8 @@ while(turnOff==False):
                 confirmTest = False
                 while (confirmTest == False):
                     print('\nPersonagem:', player.name, 'de sexo', player.sex)
-                    test = input('Confirmar personagem? s/n: ')
-                    if (test == 's' or test == ''):
+                    test = input('Confirmar personagem? S/n: ')
+                    if (test == 's' or test == 'S' or test == ''):
                         confirmTest = True
                         charCreateTest = True
                     elif (test == 'n'):
