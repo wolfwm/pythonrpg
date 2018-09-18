@@ -62,7 +62,7 @@ agua = 50
 eter = 80
 terra = 55
 
-magiclist = [fogo, ar, agua, eter, terra]
+magiclist = []
 
 #fim da lista de magias
 
@@ -81,19 +81,28 @@ class Player:
         if(sex=='m' or sex=='f'):
             self.sex = sex
             self.name = name
-            if(sex=='m'):
-                self.hpmax = 380
-                self.mpmax = 150
-                self.atk = 45
-                self.defe = 15
+            if name == 'cheatmode':
+                self.sex='m'
+                self.name='Wolf'
+                self.hpmax=9999
+                self.mpmax=9999
+                self.atk=9999
+                self.defe=9999
+                self.money=9999
             else:
-                self.hpmax = 410
-                self.mpmax = 200
-                self.atk = 40
-                self.defe = 10
+                if(sex=='m'):
+                    self.hpmax = 380
+                    self.mpmax = 150
+                    self.atk = 45
+                    self.defe = 15
+                else:
+                    self.hpmax = 410
+                    self.mpmax = 200
+                    self.atk = 40
+                    self.defe = 10
+                self.money = 20
             self.hp = self.hpmax
             self.mp = self.mpmax
-            self.money = 20
             self.runCount = 0
             self.deathCount = 0
         else:
@@ -291,6 +300,8 @@ def battle(id, canRun):
                 print('Escolha inválida (',plyrinpt,')')
         if(enemyHP > 0 and player.hp > 0 and run==False):
             dmg = mon.atk + random.randint(-3,3) - defend
+            if dmg < 0:
+                dmg=0
             player.hp -= dmg
             print(player.name,'sofreu',dmg,'de dano de',mon.name)
             defend = 0
@@ -322,7 +333,7 @@ while(turnOff==False):
                 player = Player(sex, input('\nEscolha o nome de seu personagem: '))
                 confirmTest = False
                 while (confirmTest == False):
-                    print('\nPersonagem:', player.name, 'de sexo', sex)
+                    print('\nPersonagem:', player.name, 'de sexo', player.sex)
                     test = input('Confirmar personagem? s/n: ')
                     if (test == 's' or test == ''):
                         confirmTest = True
