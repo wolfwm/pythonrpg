@@ -160,7 +160,7 @@ def battle(id, canRun):
                         if plyrinpt == 'fogo':
                             if fogo in magiclist:
                                 if mon.weakness == 'fogo':
-                                    dmg=fogo+30
+                                    dmg=fogo*2
                                 else:
                                     dmg=fogo
                                 enemyHP -= dmg
@@ -169,11 +169,12 @@ def battle(id, canRun):
                                 player.mp-=25
                                 mgtest=True
                                 choiceTest=True
-
+                            else:
+                                print(player.name,'não sabe essa magia ( fogo )')
                         elif plyrinpt == 'ar':
-                            if gelo in magiclist:
+                            if ar in magiclist:
                                 if mon.weakness == 'ar':
-                                    dmg = ar + 10
+                                    dmg = ar *2
                                 else:
                                     dmg = ar
                                 enemyHP -= dmg
@@ -182,10 +183,12 @@ def battle(id, canRun):
                                 player.mp-=20
                                 mgtest=True
                                 choiceTest=True
+                            else:
+                                print(player.name,'não sabe essa magia ( ar )')
                         elif plyrinpt == 'agua':
                             if agua in magiclist:
                                 if mon.weakness == 'agua':
-                                    dmg = agua + 30
+                                    dmg = agua *2
                                 else:
                                     dmg = agua
                                 enemyHP -= dmg
@@ -194,10 +197,12 @@ def battle(id, canRun):
                                 player.mp-=10
                                 mgtest=True
                                 choiceTest=True
+                            else:
+                                print(player.name,'não sabe essa magia ( agua )')
                         elif plyrinpt == 'eter':
                             if eter in magiclist:
                                 if mon.weakness == 'eter':
-                                    dmg = eter + 20
+                                    dmg = eter *2
                                 else:
                                     dmg = eter
                                 enemyHP -= dmg
@@ -206,19 +211,22 @@ def battle(id, canRun):
                                 player.mp -= 30
                                 mgtest = True
                                 choiceTest = True
+                            else:
+                                print(player.name,'não sabe essa magia ( eter )')
                         elif plyrinpt == 'terra':
                             if terra in magiclist:
                                 if mon.weakness == 'terra':
-                                    dmg = terra + 10
+                                    dmg = terra *2
+                                else:
+                                    dmg = terra
+                                enemyHP -= dmg
+                                print(player.name, 'gastou 15 MP')
+                                print(player.name, 'infligiu', dmg, 'de dano a', mon.name)
+                                player.mp-=15
+                                mgtest = True
+                                choiceTest = True
                             else:
-                                dmg = terra
-                            enemyHP -= dmg
-                            print(player.name, 'gastou 15 MP')
-                            print(player.name, 'infligiu', dmg, 'de dano a', mon.name)
-                            player.mp-=15
-                            mgtest = True
-                            choiceTest = True
-                       
+                                print(player.name,'não sabe essa magia ( terra )')
                         elif plyrinpt=='0':
                             mgtest=True
                         else:
@@ -240,6 +248,8 @@ def battle(id, canRun):
                                 itemlist.remove(hp25)
                                 itemtest=True
                                 choiceTest=True
+                            else:
+                                print(player.name,'não tem esse item ( hp25 )')
                         elif plyrinpt == 'hp50':
                             if hp50 in itemlist:
                                 player.hp = player.hp + hp50
@@ -249,6 +259,8 @@ def battle(id, canRun):
                                 itemlist.remove(hp50)
                                 itemtest=True
                                 choiceTest=True
+                            else:
+                                print(player.name,'não tem esse item ( hp50 )')
                         elif plyrinpt == 'mp40':
                             if mp40 in itemlist:
                                 player.mp = player.mp + mp40
@@ -258,6 +270,8 @@ def battle(id, canRun):
                                 itemlist.remove(mp40)
                                 itemtest=True
                                 choiceTest=True
+                            else:
+                                print(player.name,'não tem esse item ( mp40 )')
                         elif plyrinpt == 'defesa':
                             if defesa in itemlist:
                                 enemyAtk = enemyAtk-enemyAtk*defesa
@@ -265,6 +279,8 @@ def battle(id, canRun):
                                 itemlist.remove(defesa)
                                 itemtest=True
                                 choiceTest=True
+                            else:
+                                print(player.name,'não tem esse item ( defesa )')
                         elif plyrinpt=='0':
                             itemtest=True
                         else:
