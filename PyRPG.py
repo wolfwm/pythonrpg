@@ -40,11 +40,11 @@ class Monster:
 
 # inicio da lista de monstros
 
-lobo = Monster('Lobo',100,20,0,'fogo',1)
-loboF = Monster('Lobo Faminto',130,23,0,'fogo',2)
-loboA = Monster('Lobo Alpha',150,26,0,'fogo',3)
+lobo = Monster('Lobo',100,20,0,'agua',1)
+loboF = Monster('Lobo Faminto',130,23,0,'terra',2)
+loboA = Monster('Lobo Alpha',150,26,0,'ar',3)
 loboH = Monster('Lobisomem',160,28,0,'fogo',4)
-loboM = Monster('Lobo Mau',180,30,0,'fogo',5)
+loboM = Monster('Lobo Mau',180,30,0,'eter',5)
 
 # fim da lista de monstros
 
@@ -57,9 +57,12 @@ loboMP = Monster('Lobo Mau Picapau',200,33,0,'fogo',6)
 #lista de magias
 
 fogo = 70
-gelo = 70
-agua = 70
-magiclist = [fogo, gelo, agua]
+ar = 60
+agua = 50
+eter = 80
+terra = 55
+
+magiclist = [fogo, ar, agua, eter, terra]
 
 #fim da lista de magias
 
@@ -149,11 +152,11 @@ def battle(id, canRun):
                 defend = player.defe
                 print(player.name,'está se defendendo')
             elif(plyrinpt=='m'):
-                if (fogo in magiclist or gelo in magiclist or agua in magiclist):
+                if (fogo in magiclist or terra in magiclist or agua in magiclist or ar in magiclist or eter in magiclist):
                     mgtest=False
                     while mgtest==False:
                         dmg=0
-                        plyrinpt = str(input('Escolha fogo, gelo, agua, ou 0 para cancelar: '))
+                        plyrinpt = str(input('Escolha fogo, ar, agua, eter, terra ou 0 para cancelar: '))
                         if plyrinpt == 'fogo':
                             if fogo in magiclist:
                                 if mon.weakness == 'fogo':
@@ -167,16 +170,16 @@ def battle(id, canRun):
                                 mgtest=True
                                 choiceTest=True
 
-                        elif plyrinpt == 'gelo':
+                        elif plyrinpt == 'ar':
                             if gelo in magiclist:
-                                if mon.weakness == 'gelo':
-                                    dmg = gelo + 30
+                                if mon.weakness == 'ar':
+                                    dmg = ar + 10
                                 else:
-                                    dmg = gelo
+                                    dmg = ar
                                 enemyHP -= dmg
-                                print(player.name, 'gastou 25 MP')
+                                print(player.name, 'gastou 20 MP')
                                 print (player.name, 'infligiu', dmg, 'de dano a', mon.name)
-                                player.mp-=25
+                                player.mp-=20
                                 mgtest=True
                                 choiceTest=True
                         elif plyrinpt == 'agua':
@@ -186,11 +189,36 @@ def battle(id, canRun):
                                 else:
                                     dmg = agua
                                 enemyHP -= dmg
-                                print(player.name, 'gastou 25 MP')
+                                print(player.name, 'gastou 10 MP')
                                 print (player.name, 'infligiu', dmg, 'de dano a', mon.name)
-                                player.mp-=25
+                                player.mp-=10
                                 mgtest=True
                                 choiceTest=True
+                        elif plyrinpt == 'eter':
+                            if eter in magiclist:
+                                if mon.weakness == 'eter':
+                                    dmg = eter + 20
+                                else:
+                                    dmg = eter
+                                enemyHP -= dmg
+                                print(player.name, 'gastou 30 MP')
+                                print(player.name, 'infligiu', dmg, 'de dano a', mon.name)
+                                player.mp -= 30
+                                mgtest = True
+                                choiceTest = True
+                        elif plyrinpt == 'terra':
+                            if terra in magiclist:
+                                if mon.weakness == 'terra':
+                                    dmg = terra + 10
+                            else:
+                                dmg = terra
+                            enemyHP -= dmg
+                            print(player.name, 'gastou 15 MP')
+                            print(player.name, 'infligiu', dmg, 'de dano a', mon.name)
+                            player.mp-=15
+                            mgtest = True
+                            choiceTest = True
+                       
                         elif plyrinpt=='0':
                             mgtest=True
                         else:
