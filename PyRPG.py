@@ -101,6 +101,7 @@ class Player:
                     self.atk = 40
                     self.defe = 10
                 self.money = 20
+            self.alignment = 0
             self.hp = self.hpmax
             self.mp = self.mpmax
             self.runCount = 0
@@ -123,8 +124,8 @@ def battle(id, canRun):
     elif(id == 5):
         mon = monlist5[random.randint(0, len(monlist5) - 1)]
 
-    elif(id == 6):
-        mon = bosslist[random.randint(0, len(bosslist) - 1)]
+#    elif(id == 6):
+#        mon = bosslist[random.randint(0, len(bosslist) - 1)]
 
         # id 6 é uma luta de chefe aleatória
 
