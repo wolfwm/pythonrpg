@@ -306,6 +306,22 @@ def battle(id, canRun):
             player.hp -= dmg
             print(player.name,'sofreu',dmg,'de dano de',mon.name)
             defend = 0
+        if player.hp < 10 or player.hp > 0 and player.mp >= 5
+        limitbreak = false
+            while (limitbreak == False):
+                limitoption = input('Deseja atacar com Limit Break? (o seu ataque ficará mais forte, mas terá gasto de 5 MP) aperte s para sim ou n para não: ')
+                    if (limitoption == 's'): 
+                    limitbreak = player.atk + 80
+                    enemyHP -= limitbreak 
+                    player.mp -= 5
+                    print ('Ataque Limite Break realizado com sucesso!')
+                    print (player.name, 'infligiu', limitbreak, 'de dano a', mon.name)
+                    limitbreak = True
+                elif limitbreak == 'n':
+                    print ('Limit Break não utilizado')
+                    limitbreak = True
+                else:
+                    print ('Escolha inválida! Aperte s para sim ou n para não: ')
         if(enemyHP<=0):
             player.atk += 1
             dinheiro=random.randint(3,15)
