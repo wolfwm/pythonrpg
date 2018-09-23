@@ -40,17 +40,27 @@ class Monster:
 
 # inicio da lista de monstros
 
-lobo = Monster('Lobo',100,20,0,'agua',1)
-loboF = Monster('Lobo Faminto',130,23,0,'terra',2)
-loboA = Monster('Lobo Alpha',150,26,0,'ar',3)
+lobo = Monster('Lobo',100,20,0,'fogo',1)
+diabrete = Monster('Diabrete',87,22,0,'agua',1)
+mandrorinha = Monster('Mandrorinha',80,18,0,'ar',1)
+carnoceronte = Monster('Carnoceronte',125,21,3,'terra',1)
+tantaruga = Monster('Tantaruga', 125,19,5,'terra',1)
+loboF = Monster('Lobo Faminto',130,23,0,'fogo',2)
+loboA = Monster('Lobo Alpha',150,26,0,'fogo',3)
 loboH = Monster('Lobisomem',160,28,0,'fogo',4)
-loboM = Monster('Lobo Mau',180,30,0,'eter',5)
+loboM = Monster('Lobo Mau',180,30,0,'fogo',5)
 
 # fim da lista de monstros
 
 # inicio da lista de chefes ( dif = 6 )
 
-loboMP = Monster('Lobo Mau Picapau',200,33,0,'fogo',6)
+loboMP = Monster('Lobo Mau Picapau',200,33,2,'fogo',6)
+dragon = Monster('Dragão',250,45,10,'ar',6)
+dragonT = Monster('Dragão Terrestre',270,40,25,'terra',6)
+dragonA = Monster('Dragão Aquatico',250,45,10,'fogo',6)
+dragonF = Monster('Grande Dragão de Fogo',260,50,10,'agua',6)
+dragonE = Monster('Dragão Etéreo',380,30,60,'eter',6)
+
 
 # fim da lista de chefes
 
@@ -378,7 +388,7 @@ while(turnOff==False):
 
         storyIndex = 0
         if(battle(1,True)==1):
-            print('Estoria se vitória ( batalha 1 )')
+            print('Estória se vitória ( batalha 1 )')
             storyIndex=1
         else:
             print('Estória se derrota ou fuga ( batalha 1 )')
@@ -387,7 +397,7 @@ while(turnOff==False):
         if(storyIndex==1):
             storyIndex=battle(2,True)
             if(storyIndex==1):
-                print('Estoria se vitória ( batalha 2 )')
+                print('Estória se vitória ( batalha 2 )')
                 storyIndex=1
             elif(storyIndex==2):
                 print('Estória se derrota ( batalha 2 )')
