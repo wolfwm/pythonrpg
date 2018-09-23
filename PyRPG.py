@@ -1,5 +1,38 @@
 import random
 
+print ('''O Conto de 1001 dias
+
+... O mundo não é mais o mesmo, nossas terras estão devastadas por bestas sedentas de sangue. Estamos cansados, cansados de correr, cansados de perder as pessoas que amamos. Minha alma estava congelada de medo, seus gritos ecoam dentro de mim…
+
+O vale sofre com a invasão de monstros, os primeiros foram fáceis de derrotar, os aldeões fizeram o trabalho rápido, antes que a praga se alastrasse, no início não tivemos baixas, até que surgiram outros monstros.
+
+Os abissais, era assim que nós os chamávamos, eles eram rápidos, vorazes, sádicos e por fim, carnívoros. Devoravam tudo que se mexiam, gostavam de brincar de caça enquanto observavam o rosto de suas vítimas, ao final do dia, poucos aldeões sobreviveram e se esconderam.
+
+Como enfrentar tais criaturas que com a força de 100 homens partiam suas vítimas ao meio? Como trazer esperança em meio a tanto sofrimento?
+
+“Libertem-no!!” – Disse o ancião do vilarejo.
+
+Os gritos cessaram imediatamente, e as atenções se voltaram para o ancião.
+
+Logo ao fundo alguém gritou “Qual a diferença entre ele (a) e os monstros? ”
+
+“Ele ainda é um de nós, e já fazem 100 anos desde que ele foi preso, diante dessa situação, é o melhor que nós temos”.
+
+A história do nosso guerreiro se inicia aqui…
+
+
+Olá guerreiro! Você está preparado para a batalha?
+
+Esperamos que sim, pois as criaturas que assombram a região não terão dó de você.
+
+Preste atenção em suas ações e decida cuidadosamente cada passo. Cada decisão, uma consequência. E isso poderá mudar o percurso da estória.
+
+Você terá poderes de ataque, defesa, magia e itens para utilizar. Por isso seja estratégico, pois a vida das pessoas dos vilarejo dependerá da sua vitória!
+
+Para o jogo ficar mais dinâmico, crie o seu personagem, o ambiente e os mostros na sua imaginação.
+
+Bom jogo!''')
+
 # import time
 
 monlist1 = []
