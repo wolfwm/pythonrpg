@@ -41,11 +41,13 @@ class Monster:
 # inicio da lista de monstros
 
 lobo = Monster('Lobo',100,20,0,'fogo',1)
-diabrete = Monster('Diabrete',87,22,0,'agua',1)
 mandrorinha = Monster('Mandrorinha',80,18,0,'ar',1)
 carnoceronte = Monster('Carnoceronte',125,21,3,'terra',1)
 tantaruga = Monster('Tantaruga', 125,19,5,'terra',1)
+kobold = Monster('Kobold',90,22,1,'agua',1)
 loboF = Monster('Lobo Faminto',130,23,0,'fogo',2)
+diabrete = Monster('Diabrete',112,22,0,'agua',2)
+
 loboA = Monster('Lobo Alpha',150,26,0,'fogo',3)
 loboH = Monster('Lobisomem',160,28,0,'fogo',4)
 loboM = Monster('Lobo Mau',180,30,0,'fogo',5)
@@ -57,10 +59,10 @@ loboM = Monster('Lobo Mau',180,30,0,'fogo',5)
 loboMP = Monster('Lobo Mau Picapau',200,33,2,'fogo',6)
 dragon = Monster('Dragão',250,45,10,'ar',6)
 dragonT = Monster('Dragão Terrestre',270,40,25,'terra',6)
-dragonA = Monster('Dragão Aquatico',250,45,10,'fogo',6)
+dragonW = Monster('Dragão Aquatico',250,45,10,'fogo',6)
 dragonF = Monster('Grande Dragão de Fogo',260,50,10,'agua',6)
 dragonE = Monster('Dragão Etéreo',380,30,60,'eter',6)
-
+dragonA = Monster('Grande Dragão Ancião',330,50,50,'',6)
 
 # fim da lista de chefes
 
