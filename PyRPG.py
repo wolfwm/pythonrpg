@@ -134,6 +134,7 @@ class Player:
             self.mp = self.mpmax
             self.runCount = 0
             self.deathCount = 0
+            self.bossCount = 0
         else:
             print('ERRO: Sexo de personagem inválido (',sex,')')
 
@@ -423,6 +424,46 @@ Os gritos cessaram imediatamente, e as atenções se voltaram para o ancião.
 Logo ao fundo alguém gritou “Qual a diferença entre el{2} e os monstros? ”
 
 “El{3} ainda é um{4} de nós, e já faz 100 anos desde que el{5} foi pres{6}, diante dessa situação, é o melhor que nós temos”.'''.format('','o' if player.sex == 'm' else 'a','e' if player.sex == 'm' else 'a','e' if player.sex == 'm' else 'a','' if player.sex == 'm' else 'a','e' if player.sex == 'm' else 'a','o' if player.sex == 'm' else 'a'))
+        print('''\nEntão {1} foi libert{2} e o ancião se aproximou com cautela
+        
+"Vá e acabe com o mal que consome nosso povo, então sua alma amaldiçoada conhecera paz.
+Siga até as ruinas ao norte onde se origina o mal que nos assola. Começe sua jornada pela floresta de Norham, e cuidado com os dragões que guardam o caminho até as ruinas" - disse o ancião em uma voz trêmula
+
+Então {3} começou sua ardua jornada até as Ruínas dracônicas ao norte'''.format('',player.name,'o' if player.sex == 'm' else 'a',player.name))
+        print('''\n{1} chega a floresta e se depara com dois caminhos
+
+Digite e para seguir o caminho escuro à esquerda
+Digite d para seguir o caminho aprazível à direita'''.format('',player.name))
+        test = False
+        while test == False:
+            plyrinpt = input('Escolha: ')
+            if plyrinpt == 'e':
+                print('\nO chão é úmido sob seus pés. De repente algo surpreende {1}'.format('',player.name))
+                bat = battle(1,True)
+                if bat == 1:
+                    print('\nAo continuar o caminho {1} encontra algo brilhante preso em uma pédra\n{2} adquiriu magia de terra!'.format('',player.name,player.name))
+                    magiclist.append(ar)
+                elif bat == 2:
+                    print('\nO monstro perde o interesse em {1} que após acordar, continua o cominho com o orgulho e o corpo ferido'.format('',player.name))
+                else:
+                    print('\n{1} foge em direção ao caminho aprazível à direita'.format('',player.name))
+                test = True
+            elif plyrinpt == 'd':
+                print('\n{1} segue tranquilamente pelo caminho e encontra um item hp50!'.format('',player.name))
+                itemlist.append(hp50)
+                test=True
+            else:
+                print('Escolha inválida (',plyrinpt,')')
+        print('{1} chegou em uma clareira onde dormia um grande dragão aládo que acordou com sua chegada e se aproximou para a batalha'.format('',player.name))
+        bat = battle(dragon,False)
+        if bat==1:
+            player.bossCount += 1
+            magiclist.append(terra)
+            print('O Grande dragão aládo jáz aos seus pés derrotado. {1} encontrou algo brilhante na boca do dragão. Magia de terra adquirida!'.format('',player.name))
+        else:
+            print(player.name,'é derrotado pelo dragão, mas consegue escapar em direção ao norte, assim que escapa do dragão',player.name,'desmaia, ao acordar...')
+
+        
 
         # fim da estória
 
