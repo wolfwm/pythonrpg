@@ -2,6 +2,8 @@
 
 import random
 
+import math
+
 # import time
 
 monlist1 = []
@@ -178,11 +180,13 @@ def battle(id, canRun):
             plyrinpt = plyrinpt.lower()
             if(plyrinpt=='a'):
                 dmg = player.atk + random.randint(-5,3) - mon.defe
+                if dmg < 3:
+                    dmg=3
                 enemyHP -= dmg
                 print(player.name,'infligiu',dmg,'de dano a',mon.name)
                 choiceTest=True
             elif plyrinpt=='l':
-                if player.hp <= 25 and player.hp > 0 and player.mp >= 5:
+                if player.hp <= player.hpmax * 0.15 and player.mp >= 5:
                     dmg = player.atk + 80
                     enemyHP -= dmg
                     player.mp -= 5
@@ -327,7 +331,7 @@ def battle(id, canRun):
                                 print(player.name,'não tem esse item ( mp40 )')
                         elif plyrinpt == 'defesa':
                             if defesa in itemlist:
-                                enemyAtk = enemyAtk-enemyAtk*defesa
+                                enemyAtk = math.ceil(enemyAtk-enemyAtk*defesa)
                                 print ('Defesa aprimorada em ',defesa)
                                 itemlist.remove(defesa)
                                 itemtest=True
@@ -441,7 +445,7 @@ Digite d para seguir o caminho aprazível à direita'''.format('',player.name))
                 print('\nO chão é úmido sob seus pés. De repente algo surpreende {1}'.format('',player.name))
                 bat = battle(1,True)
                 if bat == 1:
-                    print('\nAo continuar o caminho {1} encontra algo brilhante preso em uma pédra\n{2} adquiriu magia de terra!'.format('',player.name,player.name))
+                    print('\nAo continuar o caminho {1} encontra algo brilhante preso em uma pédra\n{2} adquiriu magia de ar!'.format('',player.name,player.name))
                     magiclist.append(ar)
                 elif bat == 2:
                     print('\nO monstro perde o interesse em {1} que após acordar, continua o cominho com o orgulho e o corpo ferido'.format('',player.name))
@@ -454,18 +458,212 @@ Digite d para seguir o caminho aprazível à direita'''.format('',player.name))
                 test=True
             else:
                 print('Escolha inválida (',plyrinpt,')')
-        print('{1} chegou em uma clareira onde dormia um grande dragão aládo que acordou com sua chegada e se aproximou para a batalha'.format('',player.name))
+        print('\n{1} chegou em uma clareira onde dormia um grande dragão aládo que acordou com sua chegada e se aproximou para a batalha'.format('',player.name))
         bat = battle(dragon,False)
         if bat==1:
             player.bossCount += 1
-            magiclist.append(terra)
-            print('O Grande dragão aládo jáz aos seus pés derrotado. {1} encontrou algo brilhante na boca do dragão. Magia de terra adquirida!'.format('',player.name))
+            magiclist.append(agua)
+            print('\nO Grande dragão aládo jáz aos seus pés derrotado. {1} encontrou algo brilhante na boca do dragão. Magia de água adquirida!'.format('',player.name))
         else:
-            print(player.name,'é derrotado pelo dragão, mas consegue escapar em direção ao norte, assim que escapa do dragão',player.name,'desmaia, ao acordar...')
+            print('\n{1} é derrotad{2} pelo dragão, mas consegue escapar em direção ao norte, assim que escapa do dragão',player.name,'desmaia, ao acordar...'.format('',player.name, 'o' if player.sex == 'm' else 'a'))
 
-        
+        print('''\nAo seguir o caminho {1} chega em uma savana. Após muito caminhar, {2} se aproxima de uma formação rochosa com uma caverna
+Digite e para entrar na caverna
+Digite a para continuar caminhando pela savana'''.format('',player.name,player.name))
+        test=False
+        while test == False:
+            plyrinpt=input('Decisão: ')
+            if plyrinpt == 'e':
+                print('''\n{1} entra na caverna, onde encontra várias luzes no teto
+Ao se distrair {2} é atacad{3} por um monstro!'''.format('',player.name,player.name,'o' if player.sex =='m' else 'a'))
+                bat= battle(2,True)
+                if bat==1:
+                    print('\n{1} encontrou a magia de fogo!'.format('',player.name))
+                    magiclist.append(fogo)
+                print('\nApós um tempo...')
+                bat = battle(2,True)
+                if bat ==1:
+                    print('\n{1} encontrou um item mp40!'.format('',player.name))
+                    itemlist.append(mp40)
+                print('{1} chega ao final da caverna e se encontra de volta na savana'.format('',player.name))
+                test=True
+            elif plyrinpt=='a':
+                print('\n{1} continua caminhando pela savana até que se depara com um inimigo'.format('',player.name))
+                bat = battle(3,False)
+                if bat ==1:
+                    print('Por vencer um inimigo nível hard, {1} ganha mais força'.format('',player.name))
+                    player.atk+=math.ceil(player.atk*0.1)
+                test=True
+            else:
+                print('Escolha inválida (',plyrinpt,')')
+        print('\nNo limíte da savana um grande dragão vermelho espera por {1}'.format('',player.name))
+        bat = battle(dragonF,False)
+        if bat ==1:
+            player.hpmax+=math.ceil(player.hpmax*0.33)
+            player.hp = player.hpmax
+            player.mp = player.mpmax
+            player.bossCount+=1
+            print('''\nApós a vitória, a energia do dragão derrotado é absorvida por {1}, que se sente recuperad{2}.
+Em pouco tempo {3} chega à costa'''.format('',player.name,'o' if player.sex == 'm' else 'a', player.name))
+        else:
+            print('''\nO dragão persegue {1} até a costa. {2} pula no mar e o dragão interrompe a perseguição como se temesse a água.
+{3} desmaia na praia, e após algum tempo...'''.format('',player.name,player.name,player.name))
+
+        print('''\nTivemos uma luta difícil, não é mesmo?
+Continue até o litoral da região. Esse é o caminho certo para Zauberkreis.
+Caminhando pela costa {1} avistou dois grupos de criaturas distintas.
+Uma se encontra na água e a outra na areia.
+Afinal, o que nos espera? Qual caminho seguir?
+Opção m para monstro do mar ou a para monstro da areia''' .format('', player.name))
+        test=False
+        while test == False:
+            plyrinpt=input('Escolha: ')
+            if plyrinpt=='m':
+                print('\n{1} encontrou um Leviatã!'.format('',player.name))
+                bat = battle(leviathan,True)
+                if bat == 3:
+                    print('\n{1} correu em dreção à praia'.format('',player.name))
+                    bat = battle(nekochan,False)
+                    print('\nO cheiro de churrasquinho de gato empesteia o ar')
+                test=True
+            elif plyrinpt=='a':
+                print('\n{1} encontrou um Neko-chan!'.format('',player.name))
+                bat = battle(nekochan,True)
+                if bat == 1:
+                    print('\nO cheiro de churasquinho de gato empesteia o ar')
+                if bat == 3:
+                    print('\n{1} correu em dreção ao mar'.format('',player.name))
+                    bat = battle(leviathan,False)
+
+                test=True
+            else:
+                print('Escolha inválida (',plyrinpt,')')
+            if bat==1:
+                print('{1} encontrou a magia de terra na praia!'.format('',player.name))
+                magiclist.append(terra)
+        print('''Dando continuidade à sua jornada, {1} se depara com um grande
+dragão aquático saltando para fora da água em sua direção e se prepara para a batalha'''.format('',player.name))
+        bat = battle(dragonW,False)
+        if bat == 1:
+            player.mpmax+=math.ceil(player.mpmax*0.5)
+            player.mp=player.mpmax
+            player.hp=player.hpmax
+            player.bossCount+=1
+            print('''\nO cheiro de peixe morto indou o ar vitorioso da batalha, {1} seguiu imediatamente em direção ao deserto árido'''.format('',player.name))
+        else:
+            print('\n{1} foge em direção ao deserto, onde o ar seco faz com que o dragão não consiga persegui-l{2}'.format('',player.name,'o' if player.sex == 'm' else 'a'))
+
+        print('''\nO caminho continua árduo e glorioso. O calor está intenso.
+Seguimos para o deserto Tryvalen, onde monstros enfurecidas nos aguardam para a batalha.
+
+Após caminhar por muito tempo sem saber ao certo se estava seguindo na direção certa,
+{1} é atacad{2} por bestas furiosas!''' . format('', player.name,'o' if player.sex == 'm' else 'a'))
+        bat = battle(4,True)
+        if bat==1:
+            print('\n{1} encontrou um item hp50!'.format('',player.name))
+            itemlist.append(hp50)
+        print('\nApós muitas horas mais de caminhada...')
+        bat=battle(5,True)
+        if bat==1:
+            print('\n{1} encontrou um item mp40'.format('',player.name))
+            itemlist.append(mp40)
+        print('''\nDe repente, ocorre uma explosão de areia logo em frente, e dela
+surge o guardião do deserto enfurecido, ao mesmo tempo um aroma nauseabundo de Neko-chan tostado infesta o ambiênte.
+O grande dragão terrestre se lança ao combate!''')
+        bat=battle(dragonT,False)
+        if bat ==1:
+            player.hp=player.hpmax
+            player.mp=player.mpmax
+            magiclist.append(eter)
+            player.bossCount+=1
+            print('''\nO cheiro intenso de Neko-chan chamuscado emana das entranhas abertas do dragão
+{1} caminha até as ruínas dracônicas, agora bem a sua frente e adentra seu interior escuro...
+{2} encontrou a magia de eter nas entranhas do dragão!'''.format('',player.name,player.name))
+        else:
+            print('''\nPara a sorte de {1} o cheiro de Neko-chan chamuscado espantou o dragão terreste depois de desacordar {2}
+As ruínas são logo em frente. Não perca mais tempo. Corra até as ruínas!'''.format('',player.name,player.name))
+
+        print('''\nConseguimos! Mas essas ruínas parecem tortuosas e de uma atmosfera tenebrosa.
+Espere! o que é aquela chama ardente no final das ruínas?!
+
+Das chamas surge um grande dragão fantasmagórico,
+o temido dragão etéreo que dá vida às criaturas amaldiçoadas, o flagelo de Zauberkreis!
+
+Prepare-se para o combate!''')
+
+        test=False
+        while test==False:
+            bat=battle(dragonE,False)
+            if bat==1:
+                test=True
+                player.hp=player.hpmax
+                player.mp=player.mpmax
+                player.bossCount+=1
+                print('''\nAgora a paz volta às casas dos aldeões,
+a vida parece estar de volta ao normal e chegamos ao fim de nossa aventura...
+    
+Ou será que não?''')
+            else:
+                test2=False
+                while test2==False:
+                    plyrinpt=input('\nContinue? S/n : ').lower()
+                    if plyrinpt=='n':
+                        test=True
+                        test2=True
+                        print('\nSeu Neko-chan!')
+                    elif plyrinpt=='s' or plyrinpt=='':
+                        test2=True
+                    else:
+                        print('\nNão entendeu Neko-chan? SIM ou NÃO')
+
+        if player.bossCount==5:
+            print('''\nApós a morte do dragão etéreo, as ruínas dracônicas começaram a desmoronar
+{1} correu para fora das ruínas e observa as malditas ruínas desaparcerem... mas algo parece não estar certo... Neko...-chan?
+    
+Um gigantesco dragão cinzento irrompe das ruínas... é ele, o lendário grande dragão ancião!
+    
+Esta é a verdadeira batalha final!'''.format('',player.name))
+            test=False
+            while test==False:
+                bat = battle(dragonA,False)
+                if bat == 1:
+                    print('''\nFinalmente a paz reina novamente em Zauberkreis.
+O círculo mágico contempla a vitória do herói que seguramente enfrentou desafios e decisões difíceis. 
+Zauberkreis agora possui um novo herói para controlar a harmonia da região!
+Parabéns! As estratégias foram muito bem elaboradas e as batalhas corajosamente enfrentadas.
+Espero que tenha gostado do jogo.
+Até a próxima!''')
+                    test=True
+                else:
+                    test2=False
+                    while test2==False:
+                        plyrinpt = input('\nContinue? S/n : ').lower()
+                        if plyrinpt == 'n':
+                            test = True
+                            test2 = True
+                            print('\nSeu Neko-chan!')
+                        elif plyrinpt == 's' or plyrinpt == '':
+                            test2 = True
+                        else:
+                            print('\nNão entendeu Neko-chan? SIM ou NÃO')
 
         # fim da estória
+
+        print('\n')
+        if player.runCount==0:
+            if player.deathCount==0:
+                print('Ranking: Matador de Dragões')
+            elif player.deathCount<=5:
+                print('Ranking: Bravo Guerreiro')
+            else:
+                print('Ranking: Valente Neko-chan')
+        else:
+            if player.deathCount==0:
+                print('Ranking: Maratonista de Zauberkreis')
+            elif player.deathCount<=5:
+                print('Ranking: Ágil Morto-vivo')
+            else:
+                print('Ranking: Alma de Neko-chan')
 
     elif(plyrinpt=='0'):
         print('Desligando o jogo')
