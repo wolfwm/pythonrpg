@@ -107,7 +107,7 @@ class Player:
         if(sex=='m' or sex=='f'):
             self.sex = sex
             self.name = name
-            if name == 'cheatmode':
+            if name == 'Cheatmode':
                 self.sex='m'
                 self.name='Wolf'
                 self.hpmax=9999
@@ -133,7 +133,7 @@ class Player:
             self.runCount = 0
             self.deathCount = 0
         else:
-            print('ERRO: Sexo de personagem inválido (', sex,')')
+            print('ERRO: Sexo de personagem inválido (',sex,')')
 
 def battle(id, canRun):
 
@@ -172,6 +172,7 @@ def battle(id, canRun):
             if player.hp <= player.hpmax * 0.15 and player.mp >= 5:
                 print('Digite l para atacar com Limit Break ( 5 MP )')
             plyrinpt=input('Decisão: ')
+            plyrinpt = plyrinpt.lower()
             if(plyrinpt=='a'):
                 dmg = player.atk + random.randint(-5,3) - mon.defe
                 enemyHP -= dmg
@@ -360,102 +361,68 @@ def battle(id, canRun):
             return 2
 
 turnOff=False
-print(print ('''O Conto de 1001 dias
- ... O mundo não é mais o mesmo, nossas terras estão devastadas por bestas sedentas de sangue. Estamos cansados, cansados de correr, cansados de perder as pessoas que amamos. Minha alma estava congelada de medo, seus gritos ecoam dentro de mim…
- O vale sofre com a invasão de monstros, os primeiros foram fáceis de derrotar, os aldeões fizeram o trabalho rápido, antes que a praga se alastrasse, no início não tivemos baixas, até que surgiram outros monstros.
- Os abissais, era assim que nós os chamávamos, eles eram rápidos, vorazes, sádicos e por fim, carnívoros. Devoravam tudo que se mexiam, gostavam de brincar de caça enquanto observavam o rosto de suas vítimas, ao final do dia, poucos aldeões sobreviveram e se esconderam.
- Como enfrentar tais criaturas que com a força de 100 homens partiam suas vítimas ao meio? Como trazer esperança em meio a tanto sofrimento?
- “Libertem-no!!” – Disse o ancião do vilarejo.
- Os gritos cessaram imediatamente, e as atenções se voltaram para o ancião.
- Logo ao fundo alguém gritou “Qual a diferença entre ele (a) e os monstros? ”
- “Ele ainda é um de nós, e já faz 100 anos desde que ele foi preso, diante dessa situação, é o melhor que nós temos”.
- A história do nosso guerreiro se inicia aqui…
- Olá guerreiro! Você está preparado para a batalha?
- Esperamos que sim, pois as criaturas que assombram a região não terão dó de você.
- Preste atenção em suas ações e decida cuidadosamente cada passo. Cada decisão, uma consequência. E isso poderá mudar o percurso da estória.
- Você terá poderes de ataque, defesa, magia e itens para utilizar. Por isso seja estratégico, pois a vida das pessoas dos vilarejo dependerá da sua vitória!
- Para o jogo ficar mais dinâmico, crie o seu personagem, o ambiente e os mostros na sua imaginação.
- Bom jogo!'''))
-while(turnOff==False):
-    plyrinpt=input('O Conto de 1001 Dias\nPressione ENTER para começar o jogo\nDigite 0 para desligar o jogo\nDecisão: ')
+print ('''\nWolfgang Walder
 
-    if(plyrinpt == ''):
+Kleber Takashi Yoshida
+
+Jorge Gomes
+
+Turma 01N
+
+Olá guerreiro! Você está preparado para a batalha?
+Esperamos que sim, pois as criaturas que assombram a região não terão dó de você.
+Preste atenção em suas ações e decida cuidadosamente cada passo. Cada decisão, uma consequência. E isso poderá mudar o percurso da estória.
+Você terá poderes de ataque, defesa, magia e itens para utilizar. Por isso seja estratégico, pois a vida das pessoas do vilarejo dependerá da sua vitória!
+Para o jogo ficar mais dinâmico, crie o seu personagem, o ambiente e os monstros na sua imaginação.
+
+Bom jogo!''')
+while(turnOff==False):
+    plyrinpt = input('\nO Conto de 1001 Dias\n\nPressione ENTER para começar o jogo\nDigite 0 para desligar o jogo\nDecisão: ').lower()
+
+    if(plyrinpt == '' or plyrinpt == 'enter'):
 
         charCreateTest = False
         while (charCreateTest == False):
-            sex = input('\nQual o sexo de seu personagem? Digite m para masculino ou f para feminino: ')
+            sex = input('\nQual o sexo de seu personagem? Digite m para masculino ou f para feminino: ').lower()
             if (sex == 'm' or sex == 'f'):
-                player = Player(sex, input('\nEscolha o nome de seu personagem: '))
+                name = input('\nEscolha o nome de seu personagem: ').capitalize()
+                player = Player(sex, name)
                 confirmTest = False
                 while (confirmTest == False):
                     print('\nPersonagem:', player.name, 'de sexo', player.sex)
-                    test = input('Confirmar personagem? S/n: ')
-                    if (test == 's' or test == 'S' or test == ''):
+                    test = input('Confirmar personagem? S/n: ').lower()
+                    if (test == 's' or test == '' or test == 'sim'):
                         confirmTest = True
                         charCreateTest = True
-                    elif (test == 'n'):
+                    elif (test == 'n' or test == 'nao' or test == 'não'):
                         confirmTest = True
                     else:
                         print('Opção inválida (', test, ')')
             else:
                 print('Sexo do personagem inválido (', sex, ')')
 
-        # começo da estoria
+        # começo da estória
 
-        storyIndex = 0
-        if(battle(1,True)==1):
-            print('Estória se vitória ( batalha 1 )')
-            storyIndex=1
-        else:
-            print('Estória se derrota ou fuga ( batalha 1 )')
-            storyIndex=2
+        print('''\n... O mundo não é mais o mesmo, nossas terras estão devastadas por bestas sedentas de sangue. Estamos cansados, cansados de correr, cansados de perder as pessoas que amamos.
+Minha alma estava congelada de medo, seus gritos ecoam dentro de mim…
 
-        if(storyIndex==1):
-            storyIndex=battle(2,True)
-            if(storyIndex==1):
-                print('Estória se vitória ( batalha 2 )')
-                storyIndex=1
-            elif(storyIndex==2):
-                print('Estória se derrota ( batalha 2 )')
-                storyIndex=2
-            else:
-                print('Estória se fuga ( batalha 2 )')
-                storyIndex=3
-        else:
-            test=False
-            while(test==False):
-                print('Escolha entre as opções\nX ( 1 )\nY ( 2 )\nZ ( 3 )')
-                choiceTest=input('Seleção: ')
-                if(choiceTest=='1'):
-                    print('Consequência de X')
-                    test=True
-                    battle(lobo,False)
-                    storyIndex=2
-                elif(choiceTest=='2'):
-                    print('Consequência de Y')
-                    test=True
-                    storyIndex=2
-                elif(choiceTest=='3'):
-                    print('Consequência de Z')
-                    test=True
-                    storyIndex=3
-                else:
-                    print('Escolha inválida (',choiceTest,')')
+O vale sofre com a invasão de monstros, os primeiros foram fáceis de derrotar, os aldeões fizeram o trabalho rápido, antes que a praga se alastrasse,
+no início não tivemos baixas, até que surgiram outros monstros.
 
-        if(storyIndex==1):
-            print('Estoria com atritos')
-        elif(storyIndex==2):
-            storyIndex = battle(loboMP,False)
-            if (storyIndex == 1):
-                print('Estoria se vitória ( batalha loboMP )')
-                storyIndex = 1
-            else:
-                print('Estória se derrota ( batalha loboMP )')
-                storyIndex = 2
-        else:
-            print('Estoria pacifica')
+Os abissais, era assim que nós os chamávamos, eles eram rápidos, vorazes, sádicos e por fim, carnívoros. Devoravam tudo que se mexia,
+gostavam de brincar de caça enquanto observavam o rosto de suas vítimas, ao final do dia, poucos aldeões sobreviveram e se esconderam.
 
-        # fim do exemplo
+Como enfrentar tais criaturas que com a força de 100 homens partiam suas vítimas ao meio? Como trazer esperança em meio a tanto sofrimento?
+
+“Libertem-n{1}!!” – Disse o ancião do vilarejo.
+
+Os gritos cessaram imediatamente, e as atenções se voltaram para o ancião.
+
+Logo ao fundo alguém gritou “Qual a diferença entre el{2} e os monstros? ”
+
+“El{3} ainda é um{4} de nós, e já faz 100 anos desde que el{5} foi pres{6}, diante dessa situação, é o melhor que nós temos”.'''.format('','o' if player.sex == 'm' else 'a','e' if player.sex == 'm' else 'a','e' if player.sex == 'm' else 'a','' if player.sex == 'm' else 'a','e' if player.sex == 'm' else 'a','o' if player.sex == 'm' else 'a'))
+
+        # fim da estória
 
     elif(plyrinpt=='0'):
         print('Desligando o jogo')
