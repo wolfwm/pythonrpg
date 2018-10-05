@@ -80,7 +80,7 @@ dragonT = Monster('Dragão Terrestre',270,40,25,'terra',6)
 dragonW = Monster('Dragão Aquático',250,45,10,'fogo',6)
 dragonF = Monster('Grande Dragão de Fogo',260,50,10,'agua',6)
 dragonE = Monster('Dragão Etéreo',380,30,60,'eter',6)
-dragonA = Monster('Grande Dragão Ancião',330,50,50,'',6)
+dragonA = Monster('Grande Dragão Anciente',330,50,50,'',6)
 
 # fim da lista de chefes
 
